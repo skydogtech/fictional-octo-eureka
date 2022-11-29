@@ -74,12 +74,19 @@ h6 {
 }
 
 h2 {
-	font-size: var(--font-size-xxl);
+	font-size: var(--font-size-md);
 }
 
 h2:not(:first-child) {
 	margin-top: var(--spacing-lg);
 }
+
+@media only screen and (min-width: 800px) {
+	h2 {
+		font-size: var(--font-size-xxl);
+	}
+}
+
 
 strong {
 	font-weight: var(--heading-font-weight);
@@ -100,8 +107,15 @@ strong {
 }
 
 .header-description h2 {
-	margin-top: var(--spacing-xxl);
+	margin-top: var(--spacing-md);
 }
+
+@media only screen and (min-width: 800px) {
+	.header-description h2 {
+		margin-top: var(--spacing-xxl);
+	}
+}
+
 
 .header-description form {
 	margin: var(--spacing-lg) 0 var(--spacing-xxl);
@@ -118,8 +132,6 @@ strong {
 	
 }
 
-
-
 /* ---------------------------------- forms --------------------------------- */
 
 form * {
@@ -132,10 +144,24 @@ input[type="submit"] {
 	color: var(--color-white);
 	border: none;
 	border-radius: 0;
-	padding: 0.9em 2em;
+	padding: 0.9em;
 	font-size: calc(var(--font-size-base) * 0.9);
 	letter-spacing: 0.03em;
 }
+
+
+@media only screen and (min-width: 800px) {
+
+    input[type="submit"] {
+		padding: 0.9em 2em;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+
+    /* Your CSS here. */
+}
+
 
 input[type="submit"]:hover {
 	background-color: var(--color-primary-darker);
@@ -168,7 +194,8 @@ input[type="text"] {
 	margin: 0 auto;
 }
 
-.Container button + button {
+.Container.true button + button,
+.Container.false button + button {
 	display: none; /* hides rewind button */
 }
 
@@ -184,7 +211,6 @@ input[type="text"] {
 	border-radius: 0;
 	padding: var(--spacing-sm) var(--spacing-lg);
 	display: flex;
-	align-items: center;
 }
 
 /* get rid of empty div inside .full-control */
@@ -193,9 +219,21 @@ input[type="text"] {
 	display: none;
 }
 
-.full-control > .seek {
-	margin-left: auto;
+.full-control .button {
+	background-color: var(--color-gray-600);
+	border: 0;
+	border-radius: 0;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
+.full-control button {
+	height: 24px;
+	width: 24px;
+}
+
 
 /* -------------------------------- grid page ------------------------------- */
 
@@ -218,7 +256,12 @@ input[type="text"] {
 	margin-right: 15px;
 	opacity: 0.75;
 	text-align: center;
-	width: 150px;
+}
+
+@media only screen and (min-width: 800px) {
+	.tabs .tab {
+		width: 150px;
+	}
 }
 
 .tabs .tab.all.false,
@@ -261,7 +304,7 @@ input[type="text"] {
 @media only screen and (min-width: 1000px) {
 
     .Container.true .title-display {
-		min-height: 280px; /* sets min height of all question blocks */
+		min-height: 280px; /* sets min height of all question blocks in grid */
 	}
 }
 
@@ -269,24 +312,24 @@ input[type="text"] {
 	font-size: var(--font-size-md);
 }
 
-.full-control .button {
-	background-color: var(--color-gray-600);
-	border: 0;
-	border-radius: 0;
-	color: #fff;
-	height: 24px;
-	width: 24px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.Container.true .full-control > .seek {
+	margin-left: auto;
 }
 
-
+.answer .false.group-view,
+.answer .true.individual-view {
+	display: none;
+}
 
 /* ---------------------- transcript (full-width) page ---------------------- */
 
+
 .header-description.false {
 	display: none;
+}
+
+.Container.false {
+	padding: 24px 0 48px;
 }
 
 .Container.false .title-display {
@@ -294,25 +337,52 @@ input[type="text"] {
 	margin: var(--spacing-xl) 0;
 }
 
-.Container.false ul.lecture-content {
+.Container.false .lecture-content {
 	list-style-type: none;
+	margin-left: calc(var(--spacing-lg) * -1);
 }
 
-.Container.false ul.lecture-content li {
-	padding-bottom: var(--spacing-md);
+.Container.false .lecture-content li {
+	padding-bottom: var(--spacing-sm);
 }
 
-.Container.false ul.lecture-content li .speaker {
-	width: 14%;
+.Container.false .lecture-content .speaker {
+	display: inline;
+	font-weight: 800;
 }
 
-.Container.false ul.lecture-content li .content {
-	width: 82%;
+@media only screen and (min-width: 800px) {
+	.Container.false .lecture-content li {
+		padding-bottom: var(--spacing-md);
+	}
+
+	.Container.false .lecture-content {
+		list-style-type: none;
+		margin-left: initial;
+	}
+
+	.Container.false .lecture-content .speaker {
+		display: inline-block;		
+		width: 14%;
+	}
+
+	.Container.false .lecture-content .content {
+		display: inline-block;
+		vertical-align: top;
+		width: 80%;
+	}
 }
+
 
 .Container.false .full-control {
 	margin-bottom: var(--spacing-xl);
 }
+
+.Container.false .full-control > .seek {
+	margin-left: var(--spacing-md);
+}
+
+/* ---------------------------- related questions --------------------------- */
 
 .neighbors-container {
 	background-color: var(--color-gray-200);
@@ -329,174 +399,14 @@ input[type="text"] {
 	font-style: italic;
 }
 
+.backBtn {
+	font-size: .9em;
+}
+
 .backBtn:hover {
-	text-decoration: underline;
-}
-/* 
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		-webkit-animation: App-logo-spin 20s linear infinite;
-		animation: App-logo-spin 20s linear infinite;
-	}
-}
+	text-decoration: underline solid var(--color-error) 1.5px;
+	text-underline-offset: 4px;
 
-.App-link {
-	color: #61dafb;
-}
-
-@-webkit-keyframes App-logo-spin {
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-	}
-
-	to {
-		-webkit-transform: rotate(1turn);
-		transform: rotate(1turn);
-	}
-}
-
-@keyframes App-logo-spin {
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-	}
-
-	to {
-		-webkit-transform: rotate(1turn);
-		transform: rotate(1turn);
-	}
-} */
-
-
-
-/* 
-
-.spinner {
-	height: 80px;
-	margin: auto;
-}
-
-.App-intro {
-	color: #fff;
-	font-size: large;
-}
-
-.white {
-	color: #fff;
-} */
-
-.answer.false-group-size {
-	min-width: 100%;
-	width: 100%;
-}
-/* 
-.false-group-size .answer-container {
-	display: inline-block;
-	width: 70%;
-} */
-
-/* .false-group-size .neighbors-container {
-	color: #fff;
-	display: inline-block;
-	margin-left: 3%;
-	vertical-align: top;
-	width: 26%; 
-} /* 
-
-.neighbors-container ul {
-	padding-left: 0;
-}
-
-.neighbor {
-	background: linear-gradient(153.23deg, #b59fdc 16.76%, #e7c590 76.84%);
-	border-radius: 15px;
-	color: #15131d;
-	cursor: pointer;
-	font-size: 1.05em;
-	list-style: none;
-	margin: 15px 0;
-	padding: 15px 20px;
-}
-
-.neighbor:hover {
-	text-decoration: underline;
-} */
-
-/* * {
-	box-sizing: border-box;
-} */
-
-
-
-/* .Container.false {
-	background-color: #15131d;
-}
-
-.Container.false .backBtn {
-	color: #fff;
-} */
-/* 
-.lectures {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	margin: 0 auto;
-	padding: 15px 8%;
-} */
-
-/* .answer.false-group-size .title-display {
-	background: none;
-	color: #fff;
-	cursor: default;
-	padding-left: 0;
-} */
-
-
-.answer.false-group-size .seek {
-	width: 80%;
-}
-
-/* .lecture-content {
-	background-color: #fff;
-	border-radius: 15px;
-	padding: 35px 40px;
-} */
-/* 
-.answer.false-group-size h2 {
-	color: #fff;
-	cursor: default;
-	font-size: 1.8em;
-	margin-top: 0;
-} */
-
-.answer.false-group-size:hover h2 {
-	text-decoration: none;
-}
-
-
-
-/* .lecture-content.individual-view li {
-	list-style: none;
-	margin-bottom: 15px;
-} */
-
-.lecture-content.individual-view .speaker {
-	display: inline-block;
-	font-weight: 800;
-	width: 17%;
-}
-
-.lecture-content.individual-view .content {
-	display: inline-block;
-	vertical-align: top;
-	width: 81%;
-}
-
-@media only screen and (max-width: 900px) {
-	.lectures .answer {
-		width: 50%;
-	}
 }
 
 .App-header h2 {
@@ -513,11 +423,6 @@ input[type="text"] {
 	padding: 8px;
 }
 
-/* .answer {
-	padding: 5px 10px 10px;
-	text-align: left;
-	width: 33%; 
-}*/
 
 .full-control .timeline {
 	color: #49494a;
@@ -527,22 +432,6 @@ input[type="text"] {
 	top: 0;
 }
 
-/* .title-display:hover h2 {
-	text-decoration: underline;
-} */
-
-/* .title-display p {
-	font-size: 0.7em;
-	margin: 4px 0;
-}
-
-.title-display p.bold {
-	font-size: 0.8em;
-}
-
-.bold {
-	font-weight: 600;
-} */
 
 .false-group-size .title-display p {
 	font-size: 0.8em;
@@ -556,99 +445,10 @@ input[type="text"] {
 .errorMessage {
 	color: var(--color-error);
 	font-weight: 700;
-	/* margin: auto; */
 }
-
-/* .search {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: left;
-	margin-top: 10px;
-	padding: 15px 0 50px;
-	width: 100%;
-} */
-/* 
-.seek {
-	display: inline-block;
-	margin-left: 18px;
-	width: 56%;
-} */
-
-/* .slider-container,
-.slider-container input {
-	width: 100%;
-} */
 
 .messages {
 	padding: 5px 10% 0;
-}
-
-/* .answer h2 {
-	color: #15131d;
-	cursor: pointer;
-	font-size: 1.2em;
-} */
-/* 
-.answer .full-control {
-	background-color: #eeebeb;
-	border-radius: 0 0 15px 15px;
-	padding-bottom: 15px;
-	position: relative;
-} */
-/* 
-.full-control .button {
-	background-color: #15131d;
-	border: 0;
-	border-radius: 10px;
-	color: #fff;
-	cursor: pointer;
-	height: 50px;
-	margin-left: 22px;
-	margin-top: 15px;
-	width: 55px;
-} */
-
-/* input[type="submit"] {
-	background-color: #b59fdc;
-	border: none;
-	border-radius: 0 5px 5px 0;
-	color: #000;
-	cursor: pointer;
-	margin-right: 1%;
-	padding: 5px;
-	width: 13%;
-} */
-
-/* input[type="submit"]:hover {
-	background-color: #9d7cd7;
-}
-
-.search > input[type="text"] {
-	border: 0;
-	border-radius: 5px 0 0 5px;
-	font-size: 1em;
-	min-width: 170px;
-	padding: 13px 10px;
-	width: 79%;
-} */
-
-@media screen and (min-width: 1300px) {
-	/* .lectures .answer {
-		width: 25%;
-	} */
-}
-
-@media screen and (min-width: 2600px) {
-	.lectures .answer {
-		width: 20%;
-	}
-}
-
-
-.answer .false.group-view,
-.answer .true.individual-view {
-	display: none;
 }
 
 .lecture-content.individual-view .Break_line {
