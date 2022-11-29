@@ -1,0 +1,79 @@
+
+@media screen and (min-width: 694px) and (max-width: 915px) {
+	.answer {
+		max-width: 50%;
+	}
+}
+
+@media screen and (min-width: 652px) and (max-width: 693px) {
+	.answer {
+		max-width: 50%;
+	}
+}
+
+@media screen and (max-width: 651px) {
+	.lectures .answer {
+		margin: auto;
+		max-width: 100%;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	.header-description h2 {
+		font-size: 1.5em;
+		width: 100%;
+	}
+
+	.header-description .search,
+	.header-description p {
+		width: 100%;
+	}
+
+	.search > input[type="text"] {
+		font-size: 0.75em;
+		width: 70%;
+	}
+
+	input[type="submit"] {
+		width: 28%;
+	}
+
+	/* .tabs .tab {
+		font-size: 0.9em;
+		width: 95px;
+	} */
+
+	.false-group-size .answer-container,
+	.false-group-size .neighbors-container {
+		width: 100%;
+	}
+
+	.answer.false-group-size h2 {
+		font-size: 1.5em;
+	}
+
+	.lecture-content.individual-view .content,
+	.lecture-content.individual-view .speaker {
+		display: block;
+		width: 100%;
+	}
+
+	.lecture-content {
+		padding: 25px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.messages {
+		padding: 5px 3% 0;
+	}
+
+	.lectures {
+		padding: 15px 1%;
+	}
+
+	.lectures .answer {
+		width: 100%;
+	}
+}
